@@ -23,7 +23,7 @@ Routes for the web application is created in this file.  (**RUN THIS**)
 ---
 
 
-### Templates Folder:  
+### templates folder:  
 - **index.html file:**  
 This is the first page and the login page.  
 - **register.html file:**  

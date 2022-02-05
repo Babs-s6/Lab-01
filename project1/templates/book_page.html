@@ -14,9 +14,9 @@
 <a href="{{ url_for('search') }}">Search Page</a><br>
 <a href="{{ url_for('logout') }}">Logout</a><br>
 
-<h2>{{ title }}</h2>
-<h3>by: {{ author }} ({{ year }})</h3>
-<p>ISBN: {{ isbn }}</p>
+<h2>Title: {{ title }}</h2>
+<h3>Author: {{ author }} ({{ year }})</h3>
+<h3>ISBN: {{ isbn }}</h3>
 
 <br><br>
 <h3>Reviews:</h3>
@@ -27,7 +27,8 @@
         <th>Average Rating</th>
     </tr>
     <tr>
-
+        <th>{{ rating_count }}</th>
+        <th>{{ average_rating }}</th>
     </tr>
 </table>
 <br>
