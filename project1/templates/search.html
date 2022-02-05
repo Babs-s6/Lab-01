@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search books</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<a href="{{ url_for('logout') }}">Logout</a><br>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<form action="{{ url_for('search') }}", method="get">
+    <label for="isbn">ISBN:</label><br>
+    <input type="text" id="isbn" name="isbn" value="{{ isbn }}"><br>
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value="{{ title }}"><br><br>
+    <label for="author">Author:</label><br>
+    <input type="text" id="author" name="author" value="{{ author }}"><br><br>
+    <input type="submit" value="Search">
+</form>
+
+
+{% if search_result|length == 0 and (isbn or title or author)%}
+    <h3>No result found for this search.</h3>
+{% else %}
+{% if search_result|length > 0 %}
+<table>
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year Published</th>
+    </tr>
+    {% for book in search_result %}
+    <tr>
+        <td><a href="{{ url_for('book_page', isbn=book.isbn) }}">{{ book.isbn }}</a></td>
+        <td>{{ book.title }}</td>
+        <td> {{ book.author }}</td>
+        <td> {{ book.year }} </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endif %}
+
+</body>
+</html>

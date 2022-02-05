@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<a href="{{ url_for('search') }}">Search Page</a><br>
+<a href="{{ url_for('logout') }}">Logout</a><br>
+
+<h2>{{ title }}</h2>
+<h3>by: {{ author }} ({{ year }})</h3>
+<p>ISBN: {{ isbn }}</p>
+
+<br><br>
+<h3>Reviews:</h3>
+<p>Google Books Review Data:</p>
+<table>
+    <tr>
+        <th>Rating Count</th>
+        <th>Average Rating</th>
+    </tr>
+    <tr>
+
+    </tr>
+</table>
+<br>
+{% if search_result %}
+<ol>
+    {% for review in search_result %}
+    <li>{{ review.username }}: ({{ review.rating }})</li>
+    <ul>
+        <li>{{review.review}}</li>
+    </ul>
+    {% endfor %}
+</ol>
+{% else %}
+<h4>Be the first one to write a review!</h4>
+{% endif %}
+
+<form action="{{ url_for('submit_review') }}", method="post">
+
+    <input type="radio" id="_1" name="score" value="1">
+    <label for="_1">1</label>
+    <input type="radio" id="_2" name="score" value="2">
+    <label for="_2">2</label>
+    <input type="radio" id="_3" name="score" value="3">
+    <label for="_3">3</label>
+    <input type="radio" id="_4" name="score" value="4">
+    <label for="_4">4</label>
+    <input type="radio" id="_5" name="score" value="5">
+    <label for="_5">5</label><br>
+
+    <label for="review">Review:</label><br>
+    <input type="text" id="review" name="review" value=""><br><br>
+    <input type="hidden", id="isbn", name="isbn", value="{{ isbn }}">
+
+    <input type="submit" value="Submit review">
+</form>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+</body>
+</html>
