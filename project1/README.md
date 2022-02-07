@@ -2,6 +2,7 @@
 # Project 1
 
 ENGO 651  
+## Websute Guide
 This is my **Website** which you can search a book and leave a comment about it.
 This website has different parts contains:
 1. Make an account by registering for website
@@ -25,7 +26,7 @@ Routes for the web application is created in this file.  (**RUN THIS**)
 ---
 
 
-### templates folder:  
+## Templates Folder:  
 - **index.html file:**  
 This is the first page and the login page.  
 - **register.html file:**  
